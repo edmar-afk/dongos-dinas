@@ -49,18 +49,7 @@ export default function HouseholdWithIncome() {
       mode: isDark ? "dark" : "light",
     },
 
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "55%",
-        borderRadius: 8,
-      },
-    },
-
-    dataLabels: {
-      enabled: true,
-    },
-
+    
     plotOptions: {
       bar: {
         dataLabels: {
