@@ -1,14 +1,13 @@
 import Chart from "react-apexcharts";
-import { ApexOptions } from "apexcharts";
 
 export default function LineChartOne() {
-  const options: ApexOptions = {
+  const options = {
     legend: {
       show: false, // Hide legend
       position: "top",
       horizontalAlign: "left",
     },
-    colors: ["#465FFF", "#9CB9FF"], // Define line colors
+    colors: ["#1D4ED8", "#60A5FA", "#FBBF24"], // Define line colors
     chart: {
       fontFamily: "Outfit, sans-serif",
       height: 310,
@@ -61,18 +60,13 @@ export default function LineChartOne() {
     xaxis: {
       type: "category", // Category-based x-axis
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
+        "Purok 1",
+        "Purok 2",
+        "Purok 3",
+        "Purok 4",
+        "Purok 5",
+        "Purok 6",
+        "Purok 7",
       ],
       axisBorder: {
         show: false, // Hide x-axis border
@@ -102,12 +96,16 @@ export default function LineChartOne() {
 
   const series = [
     {
-      name: "Sales",
-      data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
+      name: "Male",
+      data: [113, 100, 131, 16, 56, 36, 123],
     },
     {
-      name: "Revenue",
-      data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
+      name: "Female",
+      data: [113, 99, 102, 10, 37, 31, 112],
+    },
+    {
+      name: "No. of Household",
+      data: [50, 42, 50, 6, 26, 14, 47],
     },
   ];
   return (

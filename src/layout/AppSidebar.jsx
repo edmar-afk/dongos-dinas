@@ -1,140 +1,160 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
-
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 // Assume these icons are imported from an icon library
-import {
-  BoxCubeIcon,
-  CalenderIcon,
-  ChevronDownIcon,
-  GridIcon,
-  HorizontaLDots,
-  ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
-  TableIcon,
-  UserCircleIcon,
-} from "../icons";
+import { ChevronDownIcon, HorizontaLDots } from "../icons";
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";
 import logo from "../assets/image/logo.jpg";
+import {
+  VenusAndMars,
+  Road,
+  University,
+  Church,
+  Users,
+  Factory,
+  House,
+  GraduationCap,
+  HousePlus,
+  BriefcaseBusiness,
+  Briefcase,
+  BanknoteArrowUp,
+  TentTree,
+} from "lucide-react";
+import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
+import HomeWorkIcon from "@mui/icons-material/HomeWork";
+import ChurchIcon from "@mui/icons-material/Church";
+import RealEstateAgentIcon from "@mui/icons-material/RealEstateAgent";
+import EscalatorWarningIcon from "@mui/icons-material/EscalatorWarning";
+import SchoolIcon from "@mui/icons-material/School";
 
-type NavItem = {
-  name: string;
-  icon: React.ReactNode;
-  path?: string;
-  subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
-};
+const navSections = [
+  {
+    label: null,
+    items: [
+      {
+        icon: <DashboardCustomizeIcon />,
+        name: "Dashboard",
+        path: "/",
+      },
+      // {
+      //   icon: <PeopleAltIcon />,
+      //   name: "Land Classification",
+      //   path: "/profile",
+      // },
+    ],
+  },
+  {
+    label: "Population distribution",
+    items: [
+      {
+        icon: <House />,
+        name: "Household Population",
+        path: "/household-population",
+      },
+      {
+        icon: <VenusAndMars size={16} />,
+        name: "Age & Sex Distribution",
+        path: "/age-sex-distribution",
+      },
+      {
+        icon: <Factory />,
+        name: "Population by Sector",
+        path: "/population-sector",
+      },
+      {
+        icon: <Users />,
+        name: "Population by Ethnic Group",
+        path: "/ethnic",
+      },
+      {
+        icon: <Church />,
+        name: "Population by Religious Affiliation",
+        path: "/ethnic",
+      },
+    ],
+  },
+  {
+    label: "Education",
+    items: [
+      {
+        icon: <EscalatorWarningIcon />,
+        name: "School - Age Distribution",
+        path: "/age-sex",
+      },
+      {
+        icon: <GraduationCap />,
+        name: "Elementary School Data by School Year",
+        path: "/household-population",
+      },
 
-const navItems: NavItem[] = [
-  {
-    icon: <GridIcon />,
-    name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+      {
+        icon: <Road />,
+        name: "Distance from Community to School",
+        path: "/sector",
+      },
+    ],
   },
   {
-    icon: <CalenderIcon />,
-    name: "Calendar",
-    path: "/calendar",
+    label: "Social Welfare",
+    items: [
+      {
+        icon: <University />,
+        name: "Pre-School Children",
+        path: "/age-sex",
+      },
+      {
+        icon: <HousePlus />,
+        name: "No. of Household by Tenure Status",
+        path: "/household-population",
+      },
+    ],
   },
   {
-    icon: <UserCircleIcon />,
-    name: "User Profile",
-    path: "/profile",
+    label: "Local Economy",
+    items: [
+      {
+        icon: <BriefcaseBusiness />,
+        name: "Employment",
+        path: "/age-sex",
+      },
+      {
+        icon: <Briefcase />,
+        name: "Puberty by Purok",
+        path: "/household-population",
+      },
+      {
+        icon: <BanknoteArrowUp />,
+        name: "Household with Income and Food threshold, by Purok",
+        path: "/household-population",
+      },
+    ],
   },
   {
-    name: "Forms",
-    icon: <ListIcon />,
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
-  },
-  {
-    name: "Tables",
-    icon: <TableIcon />,
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
-  },
-  {
-    name: "Pages",
-    icon: <PageIcon />,
-    subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
+    label: "Agriculture",
+    items: [
+      {
+        icon: <TentTree />,
+        name: "Agricultural Land Use",
+        path: "/age-sex",
+      },
     ],
   },
 ];
 
-const othersItems: NavItem[] = [
-  {
-    icon: <PieChartIcon />,
-    name: "Charts",
-    subItems: [
-      { name: "Line Chart", path: "/line-chart", pro: false },
-      { name: "Bar Chart", path: "/bar-chart", pro: false },
-    ],
-  },
-  {
-    icon: <BoxCubeIcon />,
-    name: "UI Elements",
-    subItems: [
-      { name: "Alerts", path: "/alerts", pro: false },
-      { name: "Avatar", path: "/avatars", pro: false },
-      { name: "Badge", path: "/badge", pro: false },
-      { name: "Buttons", path: "/buttons", pro: false },
-      { name: "Images", path: "/images", pro: false },
-      { name: "Videos", path: "/videos", pro: false },
-    ],
-  },
-  {
-    icon: <PlugInIcon />,
-    name: "Authentication",
-    subItems: [
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
-    ],
-  },
-];
-
-const AppSidebar: React.FC = () => {
+const AppSidebar = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
   const location = useLocation();
+  const [openSubmenu, setOpenSubmenu] = useState(null);
+  const [subMenuHeight, setSubMenuHeight] = useState({});
+  const subMenuRefs = useRef({});
 
-  const [openSubmenu, setOpenSubmenu] = useState<{
-    type: "main" | "others";
-    index: number;
-  } | null>(null);
-  const [subMenuHeight, setSubMenuHeight] = useState<Record<string, number>>(
-    {},
-  );
-  const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
-
-  // const isActive = (path: string) => location.pathname === path;
   const isActive = useCallback(
-    (path: string) => location.pathname === path,
+    (path) => location.pathname === path,
     [location.pathname],
   );
-
-  useEffect(() => {
-    let submenuMatched = false;
-    ["main", "others"].forEach((menuType) => {
-      const items = menuType === "main" ? navItems : othersItems;
-      items.forEach((nav, index) => {
-        if (nav.subItems) {
-          nav.subItems.forEach((subItem) => {
-            if (isActive(subItem.path)) {
-              setOpenSubmenu({
-                type: menuType as "main" | "others",
-                index,
-              });
-              submenuMatched = true;
-            }
-          });
-        }
-      });
-    });
-
-    if (!submenuMatched) {
-      setOpenSubmenu(null);
-    }
-  }, [location, isActive]);
 
   useEffect(() => {
     if (openSubmenu !== null) {
@@ -148,7 +168,7 @@ const AppSidebar: React.FC = () => {
     }
   }, [openSubmenu]);
 
-  const handleSubmenuToggle = (index: number, menuType: "main" | "others") => {
+  const handleSubmenuToggle = (index, menuType) => {
     setOpenSubmenu((prevOpenSubmenu) => {
       if (
         prevOpenSubmenu &&
@@ -161,7 +181,7 @@ const AppSidebar: React.FC = () => {
     });
   };
 
-  const renderMenuItems = (items: NavItem[], menuType: "main" | "others") => (
+  const renderMenuItems = (items, menuType) => (
     <ul className="flex flex-col gap-4">
       {items.map((nav, index) => (
         <li key={nav.name}>
@@ -317,7 +337,9 @@ const AppSidebar: React.FC = () => {
                 />
 
                 <span className="flex flex-col leading-tight">
-                  <span className="font-semibold dark:text-white">Brgy. Dongos</span>
+                  <span className="font-semibold dark:text-white">
+                    Brgy. Dongos
+                  </span>
                   <span className="text-xs uppercase text-gray-500">
                     Dinas, Zamboanga del Sur
                   </span>
@@ -334,7 +356,9 @@ const AppSidebar: React.FC = () => {
                 />
 
                 <span className="flex flex-col leading-tight">
-                  <span className="font-semibold dark:text-white">Brgy. Dongos</span>
+                  <span className="font-semibold dark:text-white">
+                    Brgy. Dongos
+                  </span>
                   <span className="text-xs uppercase text-gray-400">
                     Dinas, Zamboanga del Sur
                   </span>
@@ -369,7 +393,17 @@ const AppSidebar: React.FC = () => {
                   <HorizontaLDots className="size-6" />
                 )}
               </h2>
-              {renderMenuItems(navItems, "main")}
+              {navSections.map((section, sectionIndex) => (
+                <div key={sectionIndex} className="mb-6">
+                  {section.label && (
+                    <h3 className="mb-3 text-xs uppercase text-gray-400 font-semibold tracking-wider px-2">
+                      {section.label}
+                    </h3>
+                  )}
+
+                  {renderMenuItems(section.items, "main")}
+                </div>
+              ))}
             </div>
             <div className="">
               <h2
@@ -378,18 +412,11 @@ const AppSidebar: React.FC = () => {
                     ? "lg:justify-center"
                     : "justify-start"
                 }`}
-              >
-                {isExpanded || isHovered || isMobileOpen ? (
-                  "Others"
-                ) : (
-                  <HorizontaLDots />
-                )}
-              </h2>
-              {renderMenuItems(othersItems, "others")}
+              ></h2>
             </div>
           </div>
         </nav>
-        {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null}
+        {/* {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null} */}
       </div>
     </aside>
   );
