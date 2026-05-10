@@ -54,28 +54,23 @@ export default function PubertyByPurok() {
         horizontal: false,
         columnWidth: "55%",
         borderRadius: 8,
-      },
-    },
-
-    dataLabels: {
-      enabled: true,
-    },
-
-    plotOptions: {
-      bar: {
         dataLabels: {
           total: {
             enabled: true,
             formatter: function (_val, opts) {
               const i = opts.dataPointIndex;
 
-              if (i === undefined || !proportion[i]) return "";
+              if (i == null || proportion[i] == null) return "";
 
-              return `${totalHousehold[i]} (${proportion[i]})`;
+              return `${totalHousehold[i]} (${(proportion[i] * 100).toFixed(1)}%)`;
             },
           },
         },
       },
+    },
+
+    dataLabels: {
+      enabled: true,
     },
 
     xaxis: {
@@ -114,7 +109,7 @@ export default function PubertyByPurok() {
             <div>Magnitude: ${magnitude[dataPointIndex]}</div>
             <div>Remaining: ${remaining[dataPointIndex]}</div>
             <div>Total Household: ${totalHousehold[dataPointIndex]}</div>
-            <div>Proportion: ${proportion[dataPointIndex]}</div>
+            <div>Proportion: ${(proportion[dataPointIndex] * 100).toFixed(1)}%</div>
           </div>
         `;
       },
