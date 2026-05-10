@@ -4,7 +4,7 @@ import PageMeta from "../../components/common/PageMeta";
 
 import GroupsIcon from "@mui/icons-material/Groups";
 
-export default function PopulationByEthnicGroup() {
+export default function PopulationByReligious() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -24,9 +24,9 @@ export default function PopulationByEthnicGroup() {
     return () => observer.disconnect();
   }, []);
 
-  const ethnicLabels = ["Cebuano", "Ilonggo", "Subanen", "Muslim"];
+  const ethnicLabels = ["Roman Catholic", "Seventh Day Adventist", "Iglesia ni Cristo"];
 
-  const populationData = [487, 1, 157, 1];
+  const populationData = [334, 10, 23];
 
   const totalPopulation = populationData.reduce((a, b) => a + b, 0);
 
@@ -120,7 +120,7 @@ export default function PopulationByEthnicGroup() {
       <PageMeta title="Dinas" description="Dinas" />
 
       <p className="mb-8 text-lg font-semibold text-gray-800 dark:text-gray-100">
-        Population by Ethnic Group
+        Population by Religious Affiliation
       </p>
 
       {/* <div className="mb-6">

@@ -21,6 +21,15 @@ import Home from "./pages/mainRoutes/Home";
 import HouseHoldPopulation from "./pages/mainRoutes/HouseHoldPopulation";
 import AgeSexDistribution from "./pages/mainRoutes/AgeSexDistribution";
 import PopulationBySector from "./pages/mainRoutes/PopulationBySector";
+import PopulationByEthnicGroup from "./pages/mainRoutes/PopulationByEthnicGroup";
+import PopulationByReligious from "./pages/mainRoutes/PopulationByReligious";
+import SchoolAgeDistribution from "./pages/mainRoutes/SchoolAgeDistribution";
+import ElementarySchoolData from "./pages/mainRoutes/ElementarySchoolData";
+import DistanceFromSchool from "./pages/mainRoutes/DistanceFromSchool";
+import HouseholdTenure from "./pages/mainRoutes/HouseholdTenure";
+import PubertyByPurok from "./pages/mainRoutes/PubertyByPurok";
+import HouseholdWithIncome from "./pages/mainRoutes/HouseholdWithIncome";
+import Agriculture from "./pages/mainRoutes/Agriculture";
 
 export default function App() {
   return (
@@ -34,7 +43,15 @@ export default function App() {
             <Route index path="/age-sex-distribution" element={<AgeSexDistribution/>} />
             <Route path="/household-population" element={<HouseHoldPopulation/>} />
             <Route path="/population-sector" element={<PopulationBySector/>} />
-
+            <Route path="/population-ethnic-group" element={<PopulationByEthnicGroup/>} />
+            <Route path="/population-religious" element={<PopulationByReligious/>} />
+            <Route path="/school-age-distribution" element={<SchoolAgeDistribution/>} />
+            <Route path="/elementary-school-data" element={<ElementarySchoolData/>} />
+            <Route path="/distance-from-school" element={<DistanceFromSchool/>} />
+            <Route path="/household-tenure" element={<HouseholdTenure/>} />
+            <Route path="/purok-puberty" element={<PubertyByPurok/>} />
+            <Route path="/household-with-income" element={<HouseholdWithIncome/>} />
+            <Route path="/agriculture" element={<Agriculture/>} />
 
 
             <Route path="/calendar" element={<Calendar />} />

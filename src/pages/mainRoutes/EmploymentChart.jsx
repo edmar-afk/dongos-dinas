@@ -1,15 +1,15 @@
 import Chart from "react-apexcharts";
 
-export default function LineChartOne() {
+function EmploymentChart() {
   const options = {
     chart: {
       type: "pie",
       fontFamily: "Outfit, sans-serif",
     },
 
-    labels: ["Pre-School Children", "Day Care Center"],
+    labels: ["Labor force", "Employed", "Unemployed"],
 
-    colors: ["#1D4ED8", "#60A5FA"],
+    colors: ["#465FFF", "#FACC15", "#60A5FA"],
 
     legend: {
       position: "bottom",
@@ -22,23 +22,27 @@ export default function LineChartOne() {
       },
     },
 
+    stroke: {
+      width: 2,
+    },
+
     tooltip: {
       theme: "light",
       y: {
         formatter: (val) => `${val}`,
       },
     },
-
-    stroke: {
-      width: 2,
-    },
   };
 
-  const series = [28, 13];
+  const series = [441, 61, 85];
 
   return (
-    <div className="w-full flex justify-center">
-      <Chart options={options} series={series} type="pie" height={310} />
+    <div className="w-full bg-white dark:bg-gray-900 rounded-2xl p-5">
+      <h2 className="text-lg font-semibold mb-4">Local Economy: Employment</h2>
+
+      <Chart options={options} series={series} type="pie" height={350} />
     </div>
   );
 }
+
+export default EmploymentChart;

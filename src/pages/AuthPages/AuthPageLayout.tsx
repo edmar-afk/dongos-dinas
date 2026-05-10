@@ -2,7 +2,7 @@ import React from "react";
 import GridShape from "../../components/common/GridShape";
 import { Link } from "react-router";
 import ThemeTogglerTwo from "../../components/common/ThemeTogglerTwo";
-
+import logo from "../../assets/image/logo.jpg";
 export default function AuthLayout({
   children,
 }: {
@@ -16,17 +16,21 @@ export default function AuthLayout({
           <div className="relative flex items-center justify-center z-1">
             {/* <!-- ===== Common Grid Shape Start ===== --> */}
             <GridShape />
-            <div className="flex flex-col items-center max-w-xs">
-              <Link to="/" className="block mb-4">
+            <div className="flex flex-col items-center max-w-md">
+              <Link to="/signin" className="mb-4 flex flex-row items-center gap-4">
                 <img
                   width={231}
                   height={48}
-                  src="/images/logo/auth-logo.svg"
+                  src={logo}
                   alt="Logo"
+                  className="w-14 rounded-full"
                 />
+                <p className="text-3xl font-bold text-white">
+                  Lungsod sa Dungos
+                </p>
               </Link>
               <p className="text-center text-gray-400 dark:text-white/60">
-                Free and Open-Source Tailwind CSS Admin Dashboard Template
+                Gikan sa lungsod sa Dinas, Zamboanga del Sur
               </p>
             </div>
           </div>

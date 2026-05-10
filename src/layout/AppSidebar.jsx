@@ -67,12 +67,12 @@ const navSections = [
       {
         icon: <Users />,
         name: "Population by Ethnic Group",
-        path: "/ethnic",
+        path: "/population-ethnic-group",
       },
       {
         icon: <Church />,
         name: "Population by Religious Affiliation",
-        path: "/ethnic",
+        path: "/population-religious",
       },
     ],
   },
@@ -82,53 +82,53 @@ const navSections = [
       {
         icon: <EscalatorWarningIcon />,
         name: "School - Age Distribution",
-        path: "/age-sex",
+        path: "/school-age-distribution",
       },
       {
         icon: <GraduationCap />,
         name: "Elementary School Data by School Year",
-        path: "/household-population",
+        path: "/elementary-school-data",
       },
 
       {
         icon: <Road />,
         name: "Distance from Community to School",
-        path: "/sector",
+        path: "/distance-from-school",
       },
     ],
   },
   {
     label: "Social Welfare",
     items: [
-      {
-        icon: <University />,
-        name: "Pre-School Children",
-        path: "/age-sex",
-      },
+      // {
+      //   icon: <University />,
+      //   name: "Pre-School Children",
+      //   path: "/age-sex",
+      // },
       {
         icon: <HousePlus />,
         name: "No. of Household by Tenure Status",
-        path: "/household-population",
+        path: "/household-tenure",
       },
     ],
   },
   {
-    label: "Local Economy",
+    label: "Puberty by Purok",
     items: [
-      {
-        icon: <BriefcaseBusiness />,
-        name: "Employment",
-        path: "/age-sex",
-      },
+      // {
+      //   icon: <BriefcaseBusiness />,
+      //   name: "Employment",
+      //   path: "/age-sex",
+      // },
       {
         icon: <Briefcase />,
-        name: "Puberty by Purok",
-        path: "/household-population",
+        name: "Household with Income poverty threshold",
+        path: "/purok-puberty",
       },
       {
         icon: <BanknoteArrowUp />,
         name: "Household with Income and Food threshold, by Purok",
-        path: "/household-population",
+        path: "/household-with-income",
       },
     ],
   },
@@ -138,7 +138,7 @@ const navSections = [
       {
         icon: <TentTree />,
         name: "Agricultural Land Use",
-        path: "/age-sex",
+        path: "/agriculture",
       },
     ],
   },

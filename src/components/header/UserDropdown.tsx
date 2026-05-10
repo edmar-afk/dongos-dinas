@@ -70,7 +70,7 @@ export default function UserDropdown() {
               fill=""
             />
           </svg>
-          Sign out
+          Log Out
         </Link>
       </Dropdown>
     </div>

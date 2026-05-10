@@ -8,7 +8,7 @@ export default function LineChart() {
       <PageMeta title="Dinas" description="Dinas" />
 
       <div className="space-y-6">
-        <ComponentCard title="Household Population Distribution by Sex, by Purok">
+        <ComponentCard title="Social Welfare: Pre-school Children">
           <LineChartOne
             total={1079}
             male={575}

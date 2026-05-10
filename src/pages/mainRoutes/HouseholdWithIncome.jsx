@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import PageMeta from "../../components/common/PageMeta";
 
-import GroupsIcon from "@mui/icons-material/Groups";
-
-export default function PopulationByEthnicGroup() {
+export default function HouseholdWithIncome() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -15,7 +13,6 @@ export default function PopulationByEthnicGroup() {
     checkTheme();
 
     const observer = new MutationObserver(() => checkTheme());
-
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
@@ -24,41 +21,26 @@ export default function PopulationByEthnicGroup() {
     return () => observer.disconnect();
   }, []);
 
-  const ethnicLabels = ["Cebuano", "Ilonggo", "Subanen", "Muslim"];
+  const purokLabels = [
+    "Purok 1",
+    "Purok 2",
+    "Purok 3",
+    "Purok 4",
+    "Purok 5",
+    "Purok 6",
+  ];
 
-  const populationData = [487, 1, 157, 1];
+  const totalHousehold = [226, 199, 233, 26, 93, 67];
+  const magnitude = [45, 60, 80, 5, 10, 12];
 
-  const totalPopulation = populationData.reduce((a, b) => a + b, 0);
+  const proportion = [0.2, 0.3, 0.34, 0.19, 0.11, 0.18];
 
-  const [animatedPopulation, setAnimatedPopulation] = useState(0);
-
-  useEffect(() => {
-    const duration = 1000;
-    const stepTime = 16;
-    const steps = duration / stepTime;
-    const increment = totalPopulation / steps;
-
-    let current = 0;
-    let i = 0;
-
-    const interval = setInterval(() => {
-      i++;
-
-      if (i <= steps) {
-        current += increment;
-        setAnimatedPopulation(Math.floor(current));
-      } else {
-        setAnimatedPopulation(totalPopulation);
-        clearInterval(interval);
-      }
-    }, stepTime);
-
-    return () => clearInterval(interval);
-  }, [totalPopulation]);
+  const remaining = totalHousehold.map((v, i) => v - magnitude[i]);
 
   const chartOptions = {
     chart: {
       type: "bar",
+      stacked: true,
       toolbar: { show: false },
       foreColor: isDark ? "#E5E7EB" : "#111827",
     },
@@ -79,9 +61,25 @@ export default function PopulationByEthnicGroup() {
       enabled: true,
     },
 
-    xaxis: {
-      categories: ethnicLabels,
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          total: {
+            enabled: true,
+            formatter: function (_val, opts) {
+              const i = opts.dataPointIndex;
 
+              if (i === undefined || !proportion[i]) return "";
+
+              return `${totalHousehold[i]} (${proportion[i]})`;
+            },
+          },
+        },
+      },
+    },
+
+    xaxis: {
+      categories: purokLabels,
       labels: {
         style: {
           colors: isDark ? "#CBD5E1" : "#374151",
@@ -101,17 +99,38 @@ export default function PopulationByEthnicGroup() {
       borderColor: isDark ? "#334155" : "#E5E7EB",
     },
 
-    tooltip: {
-      theme: isDark ? "dark" : "light",
+    legend: {
+      position: "bottom",
     },
 
-    colors: ["#465FFF"],
+    tooltip: {
+      theme: isDark ? "dark" : "light",
+      shared: true,
+      intersect: false,
+      custom: ({ dataPointIndex }) => {
+        return `
+          <div style="padding:10px">
+            <div><b>${purokLabels[dataPointIndex]}</b></div>
+            <div>Magnitude: ${magnitude[dataPointIndex]}</div>
+            <div>Remaining: ${remaining[dataPointIndex]}</div>
+            <div>Total Household: ${totalHousehold[dataPointIndex]}</div>
+            <div>Proportion: ${proportion[dataPointIndex]}</div>
+          </div>
+        `;
+      },
+    },
+
+    colors: ["#465FFF", "#9CB9FF"],
   };
 
   const chartSeries = [
     {
-      name: "Population",
-      data: populationData,
+      name: "Magnitude",
+      data: magnitude,
+    },
+    {
+      name: "Remaining",
+      data: remaining,
     },
   ];
 
@@ -120,28 +139,8 @@ export default function PopulationByEthnicGroup() {
       <PageMeta title="Dinas" description="Dinas" />
 
       <p className="mb-8 text-lg font-semibold text-gray-800 dark:text-gray-100">
-        Population by Ethnic Group
+        Household with Income and food threshold, by Purok
       </p>
-
-      {/* <div className="mb-6">
-        <div className="rounded-2xl border-l-4 border-yellow-400 bg-yellow-50 p-5 shadow-sm dark:bg-slate-800">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Total Population
-              </p>
-
-              <h2 className="mt-2 text-3xl font-bold text-gray-800 dark:text-white">
-                {animatedPopulation}
-              </h2>
-            </div>
-
-            <div className="rounded-xl bg-white p-3 text-yellow-500 shadow-sm dark:bg-slate-700">
-              <GroupsIcon sx={{ fontSize: 28 }} />
-            </div>
-          </div>
-        </div>
-      </div> */}
 
       <div className="rounded-2xl bg-white p-5 shadow-sm dark:bg-slate-900">
         <ReactApexChart

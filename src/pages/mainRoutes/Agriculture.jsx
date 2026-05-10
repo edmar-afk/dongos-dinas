@@ -4,7 +4,7 @@ import PageMeta from "../../components/common/PageMeta";
 
 import GroupsIcon from "@mui/icons-material/Groups";
 
-export default function PopulationByEthnicGroup() {
+export default function Agriculture() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -24,19 +24,24 @@ export default function PopulationByEthnicGroup() {
     return () => observer.disconnect();
   }, []);
 
-  const ethnicLabels = ["Cebuano", "Ilonggo", "Subanen", "Muslim"];
+  const ethnicLabels = [
+    "Rice",
+    "Corn",
+    "Rubber",
+    "Other High Value Crops",
+  ];
 
-  const populationData = [487, 1, 157, 1];
+  const agricultureData = [157, 300, 12, 230];
 
-  const totalPopulation = populationData.reduce((a, b) => a + b, 0);
+  const totalAgricultureData = agricultureData.reduce((a, b) => a + b, 0);
 
-  const [animatedPopulation, setAnimatedPopulation] = useState(0);
+  const [animatedAgricultureData, setAnimatedAgricultureData] = useState(0);
 
   useEffect(() => {
     const duration = 1000;
     const stepTime = 16;
     const steps = duration / stepTime;
-    const increment = totalPopulation / steps;
+    const increment = totalAgricultureData / steps;
 
     let current = 0;
     let i = 0;
@@ -46,15 +51,15 @@ export default function PopulationByEthnicGroup() {
 
       if (i <= steps) {
         current += increment;
-        setAnimatedPopulation(Math.floor(current));
+        setAnimatedAgricultureData(Math.floor(current));
       } else {
-        setAnimatedPopulation(totalPopulation);
+        setAnimatedAgricultureData(totalAgricultureData);
         clearInterval(interval);
       }
     }, stepTime);
 
     return () => clearInterval(interval);
-  }, [totalPopulation]);
+  }, [totalAgricultureData]);
 
   const chartOptions = {
     chart: {
@@ -111,7 +116,7 @@ export default function PopulationByEthnicGroup() {
   const chartSeries = [
     {
       name: "Population",
-      data: populationData,
+      data: agricultureData,
     },
   ];
 
@@ -120,7 +125,7 @@ export default function PopulationByEthnicGroup() {
       <PageMeta title="Dinas" description="Dinas" />
 
       <p className="mb-8 text-lg font-semibold text-gray-800 dark:text-gray-100">
-        Population by Ethnic Group
+        Agricultural Land Use
       </p>
 
       {/* <div className="mb-6">
@@ -132,7 +137,7 @@ export default function PopulationByEthnicGroup() {
               </p>
 
               <h2 className="mt-2 text-3xl font-bold text-gray-800 dark:text-white">
-                {animatedPopulation}
+                {animatedAgricultureData}
               </h2>
             </div>
 

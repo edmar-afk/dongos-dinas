@@ -5,7 +5,8 @@ import DemographicCard from "../../components/dashboard/DemographicCard";
 import PageMeta from "../../components/common/PageMeta";
 import Map from "../../components/dashboard/Map";
 import TableOne from "../../components/dashboard/TableOne";
-import LineChart from '../Charts/LineChart'
+import LineChart from "../Charts/LineChart";
+import EmploymentChart from "./EmploymentChart";
 export default function Home() {
   return (
     <>
@@ -19,11 +20,10 @@ export default function Home() {
           <Map />
         </div>
 
-        <div className="col-span-12">
-          {/* <TableOne /> */}
-          <LineChart/>
+        <div className="col-span-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <LineChart />
+          <EmploymentChart />
         </div>
-
       </div>
     </>
   );

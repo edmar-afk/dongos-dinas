@@ -4,7 +4,7 @@ import PageMeta from "../../components/common/PageMeta";
 
 import GroupsIcon from "@mui/icons-material/Groups";
 
-export default function PopulationByEthnicGroup() {
+export default function DistanceFromSchool() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -24,19 +24,19 @@ export default function PopulationByEthnicGroup() {
     return () => observer.disconnect();
   }, []);
 
-  const ethnicLabels = ["Cebuano", "Ilonggo", "Subanen", "Muslim"];
+  const schoolLabels = ["Elementary", "Junior High", "Senior High"];
 
-  const populationData = [487, 1, 157, 1];
+  const kilometers = [5, 1, 1];
 
-  const totalPopulation = populationData.reduce((a, b) => a + b, 0);
+  const totalDistance = kilometers.reduce((a, b) => a + b, 0);
 
-  const [animatedPopulation, setAnimatedPopulation] = useState(0);
+  const [animatedDistance, setAnimatedDistance] = useState(0);
 
   useEffect(() => {
     const duration = 1000;
     const stepTime = 16;
     const steps = duration / stepTime;
-    const increment = totalPopulation / steps;
+    const increment = totalDistance / steps;
 
     let current = 0;
     let i = 0;
@@ -46,15 +46,15 @@ export default function PopulationByEthnicGroup() {
 
       if (i <= steps) {
         current += increment;
-        setAnimatedPopulation(Math.floor(current));
+        setAnimatedDistance(Math.floor(current));
       } else {
-        setAnimatedPopulation(totalPopulation);
+        setAnimatedDistance(totalDistance);
         clearInterval(interval);
       }
     }, stepTime);
 
     return () => clearInterval(interval);
-  }, [totalPopulation]);
+  }, [totalDistance]);
 
   const chartOptions = {
     chart: {
@@ -80,7 +80,7 @@ export default function PopulationByEthnicGroup() {
     },
 
     xaxis: {
-      categories: ethnicLabels,
+      categories: schoolLabels,
 
       labels: {
         style: {
@@ -90,6 +90,10 @@ export default function PopulationByEthnicGroup() {
     },
 
     yaxis: {
+      title: {
+        text: "Kilometers",
+      },
+
       labels: {
         style: {
           colors: isDark ? "#CBD5E1" : "#374151",
@@ -110,8 +114,8 @@ export default function PopulationByEthnicGroup() {
 
   const chartSeries = [
     {
-      name: "Population",
-      data: populationData,
+      name: "Distance (km)",
+      data: kilometers,
     },
   ];
 
@@ -120,7 +124,7 @@ export default function PopulationByEthnicGroup() {
       <PageMeta title="Dinas" description="Dinas" />
 
       <p className="mb-8 text-lg font-semibold text-gray-800 dark:text-gray-100">
-        Population by Ethnic Group
+        Distance From Community to School (in kilometers)
       </p>
 
       {/* <div className="mb-6">
@@ -128,11 +132,11 @@ export default function PopulationByEthnicGroup() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Total Population
+                Total Distance
               </p>
 
               <h2 className="mt-2 text-3xl font-bold text-gray-800 dark:text-white">
-                {animatedPopulation}
+                {animatedDistance} km
               </h2>
             </div>
 
