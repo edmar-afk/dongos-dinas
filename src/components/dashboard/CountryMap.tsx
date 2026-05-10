@@ -12,12 +12,6 @@ const CountryMap: React.FC<CountryMapProps> = ({ mapColor }) => {
     <VectorMap
       map={worldMill}
       backgroundColor="transparent"
-      markerStyle={{
-        initial: {
-          fill: "#465FFF",
-          r: 4, // Custom radius for markers
-        } as any, // Type assertion to bypass strict CSS property checks
-      }}
       markersSelectable={true}
       markers={[
         {

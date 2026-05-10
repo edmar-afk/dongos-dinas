@@ -136,7 +136,7 @@ const Calendar: React.FC = () => {
             selectable={true}
             select={handleDateSelect}
             eventClick={handleEventClick}
-            eventContent={renderEventContent}
+            // eventContent={renderEventContent}
             customButtons={{
               addEventButton: {
                 text: "Add Event +",
@@ -268,17 +268,17 @@ const Calendar: React.FC = () => {
   );
 };
 
-const renderEventContent = (eventInfo: any) => {
-  const colorClass = `fc-bg-${eventInfo.event.extendedProps.calendar.toLowerCase()}`;
-  return (
-    <div
-      className={`event-fc-color flex fc-event-main ${colorClass} p-1 rounded-sm`}
-    >
-      <div className="fc-daygrid-event-dot"></div>
-      <div className="fc-event-time">{eventInfo.timeText}</div>
-      <div className="fc-event-title">{eventInfo.event.title}</div>
-    </div>
-  );
-};
+// const renderEventContent = (eventInfo: any) => {
+//   const colorClass = `fc-bg-${eventInfo.event.extendedProps.calendar.toLowerCase()}`;
+//   return (
+//     <div
+//       className={`event-fc-color flex fc-event-main ${colorClass} p-1 rounded-sm`}
+//     >
+//       <div className="fc-daygrid-event-dot"></div>
+//       <div className="fc-event-time">{eventInfo.timeText}</div>
+//       <div className="fc-event-title">{eventInfo.event.title}</div>
+//     </div>
+//   );
+// };
 
 export default Calendar;
