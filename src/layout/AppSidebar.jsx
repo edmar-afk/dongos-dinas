@@ -39,11 +39,12 @@ const navSections = [
         name: "Dashboard",
         path: "/",
       },
-      // {
-      //   icon: <PeopleAltIcon />,
-      //   name: "Land Classification",
-      //   path: "/profile",
-      // },
+
+      {
+        icon: <PeopleAltIcon />,
+        name: "Brgy Profile",
+        path: "/brgy-info",
+      },
     ],
   },
   {

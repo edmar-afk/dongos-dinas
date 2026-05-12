@@ -30,6 +30,7 @@ import HouseholdTenure from "./pages/mainRoutes/HouseholdTenure";
 import PubertyByPurok from "./pages/mainRoutes/PubertyByPurok";
 import HouseholdWithIncome from "./pages/mainRoutes/HouseholdWithIncome";
 import Agriculture from "./pages/mainRoutes/Agriculture";
+import BrgyInfo from "./pages/mainRoutes/BrgyInfo";
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
          
           <Route element={<AppLayout />}>
             <Route index path="/" element={<Home />} />
+            <Route index path="/brgy-info" element={<BrgyInfo/>} />
             <Route index path="/age-sex-distribution" element={<AgeSexDistribution/>} />
             <Route path="/household-population" element={<HouseHoldPopulation/>} />
             <Route path="/population-sector" element={<PopulationBySector/>} />
