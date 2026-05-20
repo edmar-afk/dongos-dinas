@@ -45,6 +45,11 @@ const navSections = [
         name: "Brgy Profile",
         path: "/brgy-info",
       },
+      {
+        icon: <PeopleAltIcon />,
+        name: "Officials and Punong Barangays",
+        path: "/officials",
+      },
     ],
   },
   {

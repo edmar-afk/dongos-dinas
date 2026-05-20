@@ -31,6 +31,7 @@ import PubertyByPurok from "./pages/mainRoutes/PubertyByPurok";
 import HouseholdWithIncome from "./pages/mainRoutes/HouseholdWithIncome";
 import Agriculture from "./pages/mainRoutes/Agriculture";
 import BrgyInfo from "./pages/mainRoutes/BrgyInfo";
+import Officials from "./pages/mainRoutes/Officials";
 
 export default function App() {
   return (
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="/purok-puberty" element={<PubertyByPurok/>} />
             <Route path="/household-with-income" element={<HouseholdWithIncome/>} />
             <Route path="/agriculture" element={<Agriculture/>} />
+            <Route path="/officials" element={<Officials/>} />
 
 
             <Route path="/calendar" element={<Calendar />} />
